@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<!--App自定义的css-->
+		<link rel="stylesheet" type="text/css" href="../css/app.css"/>
+		<style>
+			.mui-table h5,.mui-table h6,.mui-table .mui-h5,.mui-table .mui-h6,.mui-table p{
+		        margin-top: 0;
+		    }
+		    .mui-table h5{
+		        line-height: 22px;
+		        font-weight: 333;
+		    }
+		
+		    .mui-table .oa-icon{
+		        position: absolute;
+		        right:0;
+		        bottom: 0;
+		    }
+		    .mui-table .oa-icon-star-filled{
+		        color:#f14e41;
+		    }
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">三行列表</h1>
+		</header>
+		<div class="mui-content">
+		    <ul class="mui-table-view mui-table-view-striped mui-table-view-condensed">
+		        
+		    </ul>
+		</div>
+		
+		<!--
+        	作者：zhlfox2006@qq.com
+        	时间：2017-07-19
+        	描述：
+        <code id="response"></code>-->
+		<div id="retMsg" style="display:none;"></div>
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script>
+			(function($) {
+				$.init({
+					swipeBack:true //启用右滑关闭功能
+				});
+				
+				var network = true;
+				if(mui.os.plus){
+					mui.plusReady(function () {
+						if(plus.networkinfo.getCurrentType()==plus.networkinfo.CONNECTION_NONE){
+							network = false;
+						}
+					});
+				}
+				
+				var methodEl = document.getElementById("method");
+				var dataTypeEl = document.getElementById("dataType");
+				var respnoseEl = document.getElementById("response");
+				var retMsgEl = document.getElementById("retMsg");
+				
+				//请求方式，默认为Get；
+				var type = 'get';
+				//预期服务器范围的数据类型
+				var dataType = 'html';
+				//成功响应的回调函数
+				var success = function(response) {
+					
+					if (dataType === 'json') {
+						response = JSON.stringify(response);
+					} else if (dataType === 'xml') {
+						response = new XMLSerializer().serializeToString(response).replace(/</g, "&lt;").replace(/>/g, "&gt;");
+					}
+					//respnoseEl.innerHTML = response;
+					retMsgEl.innerHTML = response;
+					var list = document.querySelectorAll('#retMsg .slist a');
+					if(list) {
+						for(var i = 0; i < list.length; i++) {
+							aLink = list[i];
+							//mui.toast(aLink.href+"--"+aLink.innerHTML);
+							
+							var li = document.createElement('li');
+							li.className = 'mui-table-view-cell';
+							li.innerHTML = '<a class="mui-navigate-right">Item ' + (i + 1) + '</a>';
+							li.innerHTML = '<div class="mui-table">'
+		                +'<div class="mui-table-cell mui-col-xs-10">'
+		                + '    <h5 class="mui-ellipsis-2">'+aLink.innerHTML+'</h5>'
+		                + '    <h6>申请人：李四</h6>'
+		                + '    <p class="mui-h6 mui-ellipsis">Hi，李明明，申请交行信息卡，100元等你拿，李明明，申请交行信息卡，100元等你拿，</p>'
+		                + '</div>'
+		                + '<div class="mui-table-cell mui-col-xs-2 mui-text-right">'
+		                + '    <span class="mui-h5">12:25</span>'
+		                + ''  
+		                + '</div>'
+		            	+ '</div>';
+							document.getElementsByClassName('mui-table-view')[0].appendChild(li);
+						}
+					}
+				};
+				//设置全局beforeSend
+				$.ajaxSettings.beforeSend = function(xhr, setting) {
+					//beforeSend演示,也可在$.ajax({beforeSend:function(){}})中设置单个Ajax的beforeSend
+					console.log('beforeSend:::' + JSON.stringify(setting));
+				};
+				//设置全局complete
+				$.ajaxSettings.complete = function(xhr, status) {
+					console.log('complete:::' + status);
+				}
+				var ajax = function() {
+					//利用RunJS的Echo Ajax功能测试
+					var url = 'http://m.newsmth.net/hot';
+					
+					//发送数据
+					var data = {
+						
+					};
+					
+					//respnoseEl.innerHTML = '正在请求中...';
+					if (type === 'get') {
+						if (dataType === 'json') {
+							$.getJSON(url, data, success);
+						} else {
+							$.get(url, data, success, dataType);
+						}
+					} else if (type === 'post') {
+						$.post(url, data, success, dataType);
+					}
+				};
+				
+				//点击描述中链接时，打开对应网页介绍；
+				$('body').on('tap', 'a', function(e) {
+					var href = this.getAttribute('href');
+					if (href) {
+						if (window.plus) {
+							plus.runtime.openURL(href);
+						} else {
+							location.href = href;
+						}
+					}
+				});
+				ajax();
+			})(mui);
+		</script>
+</html>
