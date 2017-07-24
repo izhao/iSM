@@ -204,7 +204,9 @@
 					"apps/tab-webview-subpage-contact.html",
 					"apps/tab-webview-subpage-setting.html",
 					"apps/tab-webview-subpage-chat.html",
-					"apps/setting.html"
+					"apps/setting.html",
+					"apps/messages.html",
+					"apps/wholemodule.html"
 				],
 				"priority": 0
 			},
@@ -227,6 +229,16 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css",
 					"css/app.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"apps/messages.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/app.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
 				],
 				"refer": [],
 				"priority": 0

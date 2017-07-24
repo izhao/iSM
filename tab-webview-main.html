@@ -23,20 +23,20 @@
 		</header>
 		<nav class="mui-bar mui-bar-tab">
 			<a id="defaultTab" class="mui-tab-item mui-active" href="apps/topten.html">
-				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-icon mui-icon-plus"></span>
 				<span class="mui-tab-label">每日十大</span>
 			</a>
-			<a id="defaultTab" class="mui-tab-item" href="apps/tab-webview-subpage-about.html">
-				<span class="mui-icon mui-icon-home"></span>
-				<span class="mui-tab-label">首页</span>
+			<a id="defaultTab" class="mui-tab-item" href="apps/wholemodule.html">
+				<span class="mui-icon mui-icon-list"></span>
+				<span class="mui-tab-label">全版</span>
 			</a>
-			<a class="mui-tab-item" href="apps/tab-webview-subpage-chat.html">
+			<a id="defaultTab" class="mui-tab-item" href="apps/tab-webview-subpage-about.html">
+				<span class="mui-icon mui-icon-star"></span>
+				<span class="mui-tab-label">收藏</span>
+			</a>
+			<a class="mui-tab-item" href="apps/messages.html">
 				<span class="mui-icon mui-icon-email"><span class="mui-badge">9</span></span>
 				<span class="mui-tab-label">消息</span>
-			</a>
-			<a class="mui-tab-item" href="apps/tab-webview-subpage-contact.html">
-				<span class="mui-icon mui-icon-contact"></span>
-				<span class="mui-tab-label">通讯录</span>
 			</a>
 			<a class="mui-tab-item" href="apps/setting.html">
 				<span class="mui-icon mui-icon-gear"></span>
@@ -47,7 +47,7 @@
 		<script type="text/javascript" charset="utf-8"> 
 			 //mui初始化
 			mui.init();
-			var subpages = ['apps/topten.html','apps/tab-webview-subpage-about.html', 'apps/tab-webview-subpage-chat.html', 'apps/tab-webview-subpage-contact.html', 'apps/setting.html'];
+			var subpages = ['apps/topten.html','apps/wholemodule.html', 'apps/tab-webview-subpage-about.html', 'apps/messages.html', 'apps/setting.html'];
 			var subpage_style = {
 				top: '45px',
 				bottom: '51px'
@@ -58,7 +58,7 @@
 			 //创建子页面，首个选项卡页面显示，其它均隐藏；
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
-				for (var i = 0; i < 4; i++) {
+				for (var i = 0; i < 5; i++) {
 					var temp = {};
 					var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
 					if (i > 0) {

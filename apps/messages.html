@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<!--App自定义的css-->
+		<link rel="stylesheet" type="text/css" href="../css/app.css"/>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">右侧带数字角标</h1>
+		</header>
+		<div class="mui-content">
+		    <div class="mui-card">
+		        <ul class="mui-table-view">
+		            <li class="mui-table-view-divider">短消息</li>
+		            <li class="mui-table-view-cell">
+		                <a class="mui-navigate-right">
+		                    <span class="mui-badge mui-badge-danger">15</span>
+		                    	短消息
+		                </a>
+		            </li>
+		            <li class="mui-table-view-divider">用户信件</li>
+		            <li class="mui-table-view-cell">
+		                <a class="mui-navigate-right">
+		                    <span class="mui-badge mui-badge-danger">15</span>
+		                    收件箱
+		                </a>
+		            </li>
+		            <li class="mui-table-view-cell">
+		                <a class="mui-navigate-right">
+		                    <span class="mui-badge mui-badge-purple">5</span>
+		                    发件箱
+		                </a>
+		            </li>
+		            <li class="mui-table-view-cell">
+		                <a class="mui-navigate-right">
+		                    <span class="mui-badge mui-badge-warning">5</span>
+		                    垃圾箱
+		                </a>
+		            </li>
+		            <li class="mui-table-view-cell">
+		                <a class="mui-navigate-right">
+		                    <span class="mui-badge mui-badge-warning">5</span>
+		                    地址簿
+		                </a>
+		            </li>
+		            <li class="mui-table-view-cell">
+		                <a class="mui-navigate-right">
+		                    <span class="mui-badge mui-badge-warning">5</span>
+		                    撰写邮件
+		                </a>
+		            </li>
+		            <li class="mui-table-view-divider">文章提醒</li>
+		            <li class="mui-table-view-cell">
+		                <a class="mui-navigate-right">
+		                    <span class="mui-badge mui-badge-danger">15</span>
+		                    	@我的文章
+		                </a>
+		            </li>
+		            <li class="mui-table-view-cell">
+		                <a class="mui-navigate-right">
+		                    <span class="mui-badge mui-badge-danger">15</span>
+		                    	回复我的文章
+		                </a>
+		            </li>
+		            <li class="mui-table-view-cell">
+		                <a class="mui-navigate-right">
+		                    <span class="mui-badge mui-badge-danger">15</span>
+		                    	Like我的文章
+		                </a>
+		            </li>
+		        </ul>
+		    </div>
+		</div>
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script>
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+		window.addEventListener('toggle', function(event) {
+			if (event.target.id === 'M_Toggle') {
+				var isActive = event.detail.isActive;
+				var table = document.querySelector('.mui-table-view');
+				var card = document.querySelector('.mui-card');
+				if (isActive) {
+					card.appendChild(table);
+					card.style.display = '';
+				} else {
+					var content = document.querySelector('.mui-content');
+					content.insertBefore(table, card);
+					card.style.display = 'none';
+				}
+			}
+		});
+	</script>
+</html>
